@@ -52,6 +52,7 @@ function Header({
 		}
 
 		console.log(followerCount);
+		// eslint-disable-next-line
 	}, [user.username, profileUserId]);
 
 	return (

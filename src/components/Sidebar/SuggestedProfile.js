@@ -5,7 +5,7 @@ import {
 	updateFollowedUserFollowers,
 } from "../../services/firebase";
 import { useNavigate } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
+// import * as ROUTES from "../../constants/routes";
 
 function SuggestedProfile({
 	loggedInUserDocId,
