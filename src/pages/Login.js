@@ -1,16 +1,16 @@
-import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import FirebaseContext from '../context/firebase';
-import * as ROUTES from '../constants/routes';
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import FirebaseContext from "../context/firebase";
+import * as ROUTES from "../constants/routes";
 
 function Login() {
 	const navigate = useNavigate();
 
 	const { firebase } = useContext(FirebaseContext);
-	const [emailAddress, setEmailAddress] = useState('');
-	const [password, setPassword] = useState('');
-	const [error, setError] = useState('');
-	const isInvalid = password === '' || emailAddress === '';
+	const [emailAddress, setEmailAddress] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const isInvalid = password === "" || emailAddress === "";
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
@@ -19,14 +19,14 @@ function Login() {
 			await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
 			navigate(ROUTES.DASHBOARD);
 		} catch (error) {
-			setEmailAddress('');
-			setPassword('');
+			setEmailAddress("");
+			setPassword("");
 			setError(error.message);
 		}
 	};
 
 	useEffect(() => {
-		document.title = 'Login - Instagram';
+		document.title = "Login - Instagram";
 	}, []);
 
 	return (
@@ -79,7 +79,7 @@ function Login() {
 								rounded
 								h-8
 								font-bold
-								${isInvalid && 'opacity-50'}
+								${isInvalid && "opacity-50"}
 								`}>
 							Login
 						</button>
@@ -87,11 +87,11 @@ function Login() {
 				</div>
 				<div className='flex justify-center w-full bg-white py-4 border border-gray-primary rounded items-center'>
 					<p className='text-sm'>
-						Don't have an account ?{' '}
+						Don't have an account ?{" "}
 						<a
 							href={ROUTES.SIGN_UP}
 							className='font-bold text-blue-medium'>
-							{' '}
+							{" "}
 							Sign up
 						</a>
 					</p>

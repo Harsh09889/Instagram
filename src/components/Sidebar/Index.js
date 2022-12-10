@@ -1,7 +1,7 @@
-import React from 'react';
-import useUser from '../../hooks/useUser';
-import User from './User';
-import Suggestions from './Suggestions';
+import React from "react";
+import useUser from "../../hooks/useUser";
+import User from "./User";
+import Suggestions from "./Suggestions";
 
 function Sidebar() {
 	const {

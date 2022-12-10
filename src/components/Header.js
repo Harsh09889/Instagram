@@ -1,14 +1,16 @@
-import { useContext } from 'react';
-import userContext from '../context/user';
-import firebaseContext from '../context/firebase';
-import * as ROUTES from '../constants/routes';
+import { useContext } from "react";
+import userContext from "../context/user";
+import firebaseContext from "../context/firebase";
+import * as ROUTES from "../constants/routes";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
 	const { firebase } = useContext(firebaseContext);
 	const { user } = useContext(userContext);
+	const navigate = useNavigate();
 
 	return (
-		<header className='bg-white h-16 border-b  border-gray-primary mb-8'>
+		<header className='bg-white h-16 border-b p-4 pt-0 pb-0 border-gray-primary mb-8'>
 			<div className='container mx-auto max-w-screen-lg h-full'>
 				<div className='flex justify-between h-full'>
 					<div className='text-gray-700 text-center flex items-center cursor-pointer'>
@@ -42,12 +44,13 @@ function Header() {
 										/>
 									</svg>
 								</a>
+
 								<button
 									type='button'
 									title='Sign Out'
 									onClick={() => firebase.auth().signOut()}
 									onKeyDown={(event) => {
-										if (event.key === 'Enter') {
+										if (event.key === "Enter") {
 											firebase.auth().signOut();
 										}
 									}}>
@@ -65,6 +68,31 @@ function Header() {
 										/>
 									</svg>
 								</button>
+
+								<button
+									type='button'
+									title={`Messages`}
+									onClick={() => navigate(`/p/${user.displayName}/messages`)}
+									onKeyDown={(event) => {
+										if (event.key === "Enter") {
+											firebase.auth().signOut();
+										}
+									}}>
+									<svg
+										xmlns='http://www.w3.org/2000/svg'
+										fill='none'
+										viewBox='0 0 24 24'
+										strokeWidth='1.5'
+										stroke='currentColor'
+										className='w-8 h-8 mr-6 text-black-light cursor-pointer'>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											d='M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z'
+										/>
+									</svg>
+								</button>
+
 								<div className='flex items-center cursor-pointer'>
 									<a
 										href={`/p/${user.displayName}`}
@@ -75,7 +103,7 @@ function Header() {
 											className='rounded-full h-8 w-8 flex'
 											onError={(e) => {
 												e.target.onError = null;
-												e.target.src = '/images/avatars/default.png';
+												e.target.src = "/images/avatars/default.png";
 											}}
 										/>
 									</a>

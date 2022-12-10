@@ -16,6 +16,7 @@ const Login = React.lazy(() => import("./pages/Login"));
 const Signup = React.lazy(() => import("./pages/Signup"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 const Profile = React.lazy(() => import("./pages/Profile"));
+const Messages = React.lazy(() => import("./pages/Messages"));
 
 function App() {
 	const { user } = useAuthListener();
@@ -53,6 +54,15 @@ function App() {
 							path={ROUTES.PROFILE}
 							element={<Profile />}
 						/>
+
+						<Route
+							path={ROUTES.MESSAGES}
+							element={<ProtectedRoute user={user} />}>
+							<Route
+								path={ROUTES.MESSAGES}
+								element={<Messages />}
+							/>
+						</Route>
 
 						<Route
 							path={ROUTES.DASHBOARD}
