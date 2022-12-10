@@ -8,7 +8,7 @@ import { useRef } from "react";
 
 function Inbox({ receiver }) {
 	const messageRef = firebase.firestore().collection("messages");
-	const query = messageRef.orderBy("createdAt").limit(25);
+	const query = messageRef.orderBy("createdAt");
 	const [msgInput, setMsgInput] = useState("");
 	const sender = user();
 	const dummy = useRef();
