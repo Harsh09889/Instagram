@@ -11,21 +11,19 @@ function Contacts({ setReceiver, receiver }) {
 
 	useEffect(() => {
 		async function followersToMessanger() {
-			const array = [];
+			let array =
+				user.followers &&
+				user.followers.filter((elem) => !user.following.includes(elem));
 
-			for (let i = 0; user.followers && i < user.followers.length; i++) {
-				// console.log(user.followers[i]);
-				const [followerUserObject] = await getUserByUserId(user.followers[i]);
-				array.push(followerUserObject);
+			user.following && array.push(...user.following);
+
+			let ans = [];
+			for (let i = 0; user.followers && i < array.length; i++) {
+				const [followerUserObject] = await getUserByUserId(array[i]);
+				ans.push(followerUserObject);
 			}
 
-			for (let i = 0; user.following && i < user.following.length; i++) {
-				// console.log(user.followers[i]);
-				const [followingUserObject] = await getUserByUserId(user.following[i]);
-				array.push(followingUserObject);
-			}
-
-			setFollowers(array);
+			setFollowers(ans);
 		}
 		followersToMessanger();
 	}, [user.followers, user.following]);

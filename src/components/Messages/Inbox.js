@@ -19,6 +19,9 @@ function Inbox({ receiver }) {
 
 	const sendMessage = async (e) => {
 		e.preventDefault();
+
+		if (!e.target.value) return;
+
 		await messageRef.add({
 			text: msgInput,
 			createdAt: FieldValue.serverTimestamp(),
@@ -40,7 +43,6 @@ function Inbox({ receiver }) {
 				(el.senderId === receiver && el.receiverId === sender.user.userId)
 		);
 
-	console.log(messages);
 	return (
 		<div className='col-span-2 border border-gray-primary border-l-0'>
 			<header className=' h-16 border-b bg-white border-gray-primary '></header>
