@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import FirebaseContext from '../context/firebase';
-import * as ROUTES from '../constants/routes';
-import { doesUsernameExist } from '../services/firebase';
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import FirebaseContext from "../context/firebase";
+import * as ROUTES from "../constants/routes";
+import { doesUsernameExist } from "../services/firebase";
 
 function Signup() {
 	const navigate = useNavigate();
 
 	const { firebase } = useContext(FirebaseContext);
 
-	const [username, setUsername] = useState('');
-	const [fullName, setFullName] = useState('');
-	const [emailAddress, setEmailAddress] = useState('');
-	const [password, setPassword] = useState('');
-	const [error, setError] = useState('');
-	const isInvalid = password === '' || emailAddress === '';
+	const [username, setUsername] = useState("");
+	const [fullName, setFullName] = useState("");
+	const [emailAddress, setEmailAddress] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const isInvalid = password === "" || emailAddress === "";
 
 	const handleSignup = async (e) => {
 		e.preventDefault();
@@ -39,7 +39,7 @@ function Signup() {
 				let emailToAdd = emailAddress.toLowerCase();
 				let dateCreated = Date.now();
 
-				await firebase.firestore().collection('users').add({
+				await firebase.firestore().collection("users").add({
 					userId: createdUserResult.user.uid,
 					username: usernameToAdd,
 					fullName,
@@ -50,19 +50,19 @@ function Signup() {
 
 				navigate(ROUTES.DASHBOARD);
 			} catch (error) {
-				setFullName('');
-				setUsername('');
-				setEmailAddress('');
-				setPassword('');
+				setFullName("");
+				setUsername("");
+				setEmailAddress("");
+				setPassword("");
 				setError(error.message);
 			}
 		} else {
-			setError('That uesrname is already taken please try another one!!!');
+			setError("That uesrname is already taken please try another one!!!");
 		}
 	};
 
 	useEffect(() => {
-		document.title = 'Signup - Instagram';
+		document.title = "Signup - Instagram";
 	}, []);
 
 	return (
@@ -131,7 +131,7 @@ function Signup() {
 								rounded
 								h-8
 								font-bold
-								${isInvalid && 'opacity-50'}
+								${isInvalid && "opacity-50"}
 								`}>
 							Signup
 						</button>
@@ -139,13 +139,13 @@ function Signup() {
 				</div>
 				<div className='flex justify-center w-full bg-white py-4 border border-gray-primary rounded items-center'>
 					<p className='text-sm'>
-						Have an account ?{' '}
-						<a
-							href={ROUTES.LOGIN}
-							className='font-bold text-blue-medium'>
-							{' '}
+						Have an account ?{" "}
+						<span
+							onClick={(e) => navigate(ROUTES.LOGIN)}
+							className='font-bold text-blue-medium cursor-pointer'>
+							{" "}
 							Login
-						</a>{' '}
+						</span>
 					</p>
 				</div>
 			</div>

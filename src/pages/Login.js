@@ -88,12 +88,12 @@ function Login() {
 				<div className='flex justify-center w-full bg-white py-4 border border-gray-primary rounded items-center'>
 					<p className='text-sm'>
 						Don't have an account ?{" "}
-						<a
-							href={ROUTES.SIGN_UP}
-							className='font-bold text-blue-medium'>
+						<span
+							onClick={(e) => navigate(ROUTES.SIGN_UP)}
+							className='font-bold text-blue-medium cursor-pointer'>
 							{" "}
 							Sign up
-						</a>
+						</span>
 					</p>
 				</div>
 			</div>
