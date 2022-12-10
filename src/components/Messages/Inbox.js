@@ -20,7 +20,7 @@ function Inbox({ receiver }) {
 	const sendMessage = async (e) => {
 		e.preventDefault();
 
-		if (!e.target.value) return;
+		if (msgInput === "") return null;
 
 		await messageRef.add({
 			text: msgInput,
@@ -58,7 +58,6 @@ function Inbox({ receiver }) {
 								msg.receiverId === sender.user.userId
 							) {
 								isSender = false;
-								console.log(isSender);
 							}
 							return (
 								<ChatMessage
@@ -84,7 +83,11 @@ function Inbox({ receiver }) {
 							onChange={(e) => setMsgInput(e.target.value)}
 							className='w-full border-none outline-none p-4'
 						/>
-						<button className='w-28 text-blue-medium'>Send</button>
+						<button
+							className='w-28 text-blue-medium'
+							type='submit'>
+							Send
+						</button>
 					</form>
 				) : null}
 			</div>
