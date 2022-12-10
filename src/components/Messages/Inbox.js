@@ -13,10 +13,6 @@ function Inbox({ receiver }) {
 	const sender = user();
 	const dummy = useRef();
 
-	useEffect(() => {
-		dummy.current.scrollIntoView({ behavior: "smooth" });
-	}, [receiver]);
-
 	const sendMessage = async (e) => {
 		e.preventDefault();
 
@@ -34,6 +30,9 @@ function Inbox({ receiver }) {
 	};
 
 	let [messages] = useCollectionData(query, { idField: "id" });
+	useEffect(() => {
+		dummy.current.scrollIntoView({ behavior: "smooth" });
+	}, [receiver, messages]);
 
 	messages =
 		messages &&
