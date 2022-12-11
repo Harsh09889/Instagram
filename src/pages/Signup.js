@@ -21,8 +21,6 @@ function Signup() {
 
 		const usernameExsits = await doesUsernameExist(username);
 
-		console.log(typeof emailAddress);
-
 		if (!usernameExsits.length) {
 			try {
 				const createdUserResult = await firebase

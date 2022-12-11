@@ -39,7 +39,7 @@ export async function getUserByUserId(userId) {
 }
 
 export async function getSuggestedProfiles(userId, following) {
-	const result = await firebase.firestore().collection("users").limit(10).get();
+	const result = await firebase.firestore().collection("users").limit(20).get();
 
 	const user = result.docs
 		.map((item) => ({
@@ -165,4 +165,67 @@ export async function toggleFollow(
 		followingUserId,
 		isFollowingProfile
 	);
+}
+
+export async function getToMessageUsers(followers = [], following = []) {
+	console.log("followers and followings", followers, following);
+
+	let result = [];
+
+	if (followers.length > 0 && following.length > 0) {
+		result = await firebase
+			.firestore()
+			.collection("users")
+			.where("userId", "in", following)
+			.get();
+
+		let arr = result.docs?.map((item) => ({
+			...item.data(),
+			docId: item.id,
+		}));
+
+		const result2 = await firebase
+			.firestore()
+			.collection("users")
+			.where("userId", "in", followers)
+			.get();
+
+		arr = [
+			...arr,
+			...result2.docs?.map((item) => ({
+				...item.data(),
+				docId: item.id,
+			})),
+		];
+
+		const set = new Set();
+
+		let finalAns = arr.filter((el) => {
+			if (!set.has(el.userId)) {
+				set.add(el.userId);
+				return el;
+			}
+			return false;
+		});
+
+		return finalAns;
+	} else if (following.length === 0 && followers.length > 0) {
+		result = await firebase
+			.firestore()
+			.collection("users")
+			.where("userId", "in", followers)
+			.get();
+	} else if (followers.length === 0 && following.length > 0) {
+		result = await firebase
+			.firestore()
+			.collection("users")
+			.where("userId", "in", following)
+			.get();
+	}
+	const response = result.docs?.map((item) => ({
+		...item.data(),
+		docId: item.id,
+	}));
+
+	return response;
 }

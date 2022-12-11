@@ -51,7 +51,6 @@ function Header({
 			isLoggedInUserFollowingProfile();
 		}
 
-		console.log(followerCount);
 		// eslint-disable-next-line
 	}, [user.username, profileUserId]);
 

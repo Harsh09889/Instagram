@@ -1,11 +1,10 @@
-import React from 'react';
-import usePhotos from '../hooks/usePhotos';
-import Skeleton from 'react-loading-skeleton';
-import Post from './post';
+import React from "react";
+import usePhotos from "../hooks/usePhotos";
+import Skeleton from "react-loading-skeleton";
+import Post from "./post";
 
 function Timeline() {
 	const { photos } = usePhotos();
-	console.log('photos', photos);
 	return (
 		<div className='container col-span-2'>
 			{!photos ? (
