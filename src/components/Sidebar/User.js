@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import React from "react";
+import PropTypes from "prop-types";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { Link } from "react-router-dom";
 
 const User = ({ fullName, username }) =>
 	!username || !fullName ? (
@@ -10,8 +11,8 @@ const User = ({ fullName, username }) =>
 			height={61}
 		/>
 	) : (
-		<a
-			href={`/p/${username}`}
+		<Link
+			to={`/p/${username}`}
 			className='flex justify-between mb-6 items-center'>
 			<div className='flex items-center justify-start col-span-1'>
 				<img
@@ -20,7 +21,7 @@ const User = ({ fullName, username }) =>
 					alt=''
 					onError={(e) => {
 						e.target.onError = null;
-						e.target.src = '/images/avatars/default.png';
+						e.target.src = "/images/avatars/default.png";
 					}}
 				/>
 			</div>
@@ -28,7 +29,7 @@ const User = ({ fullName, username }) =>
 				<p className='text-sm font-bold'>{username}</p>
 				<p className='text-sm '>{fullName}</p>
 			</div>
-		</a>
+		</Link>
 	);
 
 export default User;

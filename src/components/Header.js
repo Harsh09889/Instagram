@@ -2,7 +2,7 @@ import { useContext } from "react";
 import userContext from "../context/user";
 import firebaseContext from "../context/firebase";
 import * as ROUTES from "../constants/routes";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
 	const { firebase } = useContext(firebaseContext);
@@ -15,20 +15,20 @@ function Header() {
 				<div className='flex justify-between h-full'>
 					<div className='text-gray-700 text-center flex items-center cursor-pointer'>
 						<h1 className='flex justify-center w-full'>
-							<a href={ROUTES.DASHBOARD}>
+							<Link to={ROUTES.DASHBOARD}>
 								<img
 									src='/images/logo.png'
 									alt='Instagram'
 									className='mt-2 w-6/12'
 								/>
-							</a>
+							</Link>
 						</h1>
 					</div>
 					<div className='text-gray-700 text-center flex items-center justify-center'>
 						{user ? (
 							<>
-								<a
-									href={ROUTES.DASHBOARD}
+								<Link
+									to={ROUTES.DASHBOARD}
 									title='Instagram'>
 									<svg
 										className='w-8 h-8 mr-6 text-black-light cursor-pointer'
@@ -43,7 +43,7 @@ function Header() {
 											d='M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25'
 										/>
 									</svg>
-								</a>
+								</Link>
 
 								<button
 									type='button'
@@ -94,8 +94,8 @@ function Header() {
 								</button>
 
 								<div className='flex items-center cursor-pointer'>
-									<a
-										href={`/p/${user.displayName}`}
+									<Link
+										to={`/p/${user.displayName}`}
 										title={`${user.displayName}`}>
 										<img
 											src={`/images/avatars/${user.displayName}.jpg`}
@@ -106,22 +106,22 @@ function Header() {
 												e.target.src = "/images/avatars/default.png";
 											}}
 										/>
-									</a>
+									</Link>
 								</div>
 							</>
 						) : (
 							<>
-								<a href={ROUTES.LOGIN}>
+								<Link to={ROUTES.LOGIN}>
 									<button className='bg-blue-medium w-20 h-8 rounded text-white font-bold text-sm'>
 										Login
 									</button>
-								</a>
+								</Link>
 
-								<a href={ROUTES.SIGN_UP}>
+								<Link to={ROUTES.SIGN_UP}>
 									<button className='w-20 h-8 rounded font-bold text-blue-medium'>
 										Signup
 									</button>
-								</a>
+								</Link>
 							</>
 						)}
 					</div>

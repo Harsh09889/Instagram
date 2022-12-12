@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { formatDistance } from 'date-fns';
-import AddComment from './AddComment';
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { formatDistance } from "date-fns";
+import AddComment from "./AddComment";
+import { Link } from "react-router-dom";
 
 function Comments({ docId, comments: allComments, commentInput, posted }) {
 	const [comments, setComments] = useState(allComments);
@@ -18,9 +19,9 @@ function Comments({ docId, comments: allComments, commentInput, posted }) {
 					<p
 						key={` ${item.comment}- ${item.displayName}`}
 						className='mb-1'>
-						<a href={`/p/${item.displayName}`}>
+						<Link to={`/p/${item.displayName}`}>
 							<span className='mr-1 font-bold'>{item.displayName}</span>
-						</a>
+						</Link>
 						<span>{item.comment}</span>
 					</p>
 				))}

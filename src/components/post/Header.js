@@ -1,11 +1,12 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function Header({ username }) {
 	return (
 		<div className='flex border-b border-gray-primary h-4 p-4 py-8'>
 			<div className='flex items-center'>
-				<a
-					href={`/p/${username}`}
+				<Link
+					to={`/p/${username}`}
 					className='flex items-center'>
 					<img
 						src={`/images/avatars/${username}.jpg`}
@@ -13,11 +14,11 @@ function Header({ username }) {
 						className='rounded-full h-8 w-8 flex mr-3'
 						onError={(e) => {
 							e.target.onError = null;
-							e.target.src = '/images/avatars/default.png';
+							e.target.src = "/images/avatars/default.png";
 						}}
 					/>
 					<p className='font-bold'>{username}</p>
-				</a>
+				</Link>
 			</div>
 		</div>
 	);
