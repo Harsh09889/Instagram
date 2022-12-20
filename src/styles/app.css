@@ -526,10 +526,6 @@ video {
   margin-left: auto;
   margin-right: auto;
 }
-.my-12 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -783,10 +779,6 @@ video {
 }
 .bg-black-faded {
   background-color: #00000059;
-}
-.bg-black-light {
-  --tw-bg-opacity: 1;
-  background-color: rgb(38 38 38 / var(--tw-bg-opacity));
 }
 .fill-red {
   fill: #ed4956;

@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { useState } from "react";
 import "./styles.css";
 import { uploadPostImage } from "../../../services/firebase";
