@@ -1,4 +1,4 @@
-import { firebase, FieldValue } from "../lib/firebase";
+import { firebase, FieldValue, storage } from "../lib/firebase";
 
 export async function doesUsernameExist(username) {
 	const result = await firebase
@@ -168,8 +168,6 @@ export async function toggleFollow(
 }
 
 export async function getToMessageUsers(followers = [], following = []) {
-	console.log("followers and followings", followers, following);
-
 	let result = [];
 
 	if (followers.length > 0 && following.length > 0) {
@@ -229,3 +227,53 @@ export async function getToMessageUsers(followers = [], following = []) {
 
 	return response;
 }
+
+export async function addPostToPhotos(userId, url, caption) {
+	const lenResult = await firebase.firestore().collection("photos").get();
+	const lastId = lenResult.docs.length;
+
+	console.log("lastId is", lastId);
+
+	await firebase
+		.firestore()
+		.collection("photos")
+		.add({
+			photoId: lastId + 1,
+			userId: userId,
+			imageSrc: url,
+			caption: caption,
+			likes: [],
+			comments: [],
+			userLatitude: "40.7128°",
+			userLongitude: "74.0060°",
+			dateCreated: Date.now(),
+		});
+}
+
+export const uploadPostImage = async (userId, username, file, caption) => {
+	const { items } = await storage.ref(`images/users/${username}/`).listAll();
+	const photoNumber = items.length + 1;
+	console.log(photoNumber);
+
+	const uploadTask = storage
+		.ref(`images/users/${username}/${photoNumber}.png`)
+		.put(file);
+
+	uploadTask.on(
+		"state_changed",
+		(snapshot) => {},
+		(error) => console.log(error),
+		async () => {
+			//get the number of items in the folder
+
+			const imageUrl = await storage
+				.ref(`images/users/${username}/`)
+				.child(`${photoNumber}.png`)
+				.getDownloadURL();
+
+			console.log("imageUrl is", imageUrl);
+
+			await addPostToPhotos(userId, imageUrl, caption);
+		}
+	);
+};

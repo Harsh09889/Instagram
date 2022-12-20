@@ -20,6 +20,7 @@ function Header({
 }) {
 	const { user } = useUser();
 	const [isFollowingProfile, setIsFollowingProfile] = useState(false);
+
 	const activeBtnFollow = user.username && user.username !== profileUsername;
 
 	const handleToggleFollow = async () => {

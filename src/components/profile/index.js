@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Header from "./Header";
 import Photos from "./Photos";
 import { getUserPhotosByUsername } from "../../services/firebase";
+import UploadImage from "./imageUploader";
 
 function UserProfile({ user }) {
 	const reducer = (state, newState) => ({ ...state, ...newState });
@@ -39,6 +40,7 @@ function UserProfile({ user }) {
 				followerCount={followerCount}
 				setFollowerCount={dispatch}
 			/>
+			<UploadImage profile={profile} />
 			<Photos photos={photosCollection} />
 		</div>
 	);
